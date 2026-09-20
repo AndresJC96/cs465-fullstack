@@ -88,9 +88,9 @@ img {
 }
 /*------------------------------ CONTENTS ------------------------------*/
 #contents {
-	display: inline-block;
-	width: 865px;
-	padding: 0 47px;
+    display: block;
+    width: 865px;
+    padding: 0 47px;
 }
 #contents h1 {
 	color: #316e66;
