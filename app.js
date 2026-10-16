@@ -1,4 +1,10 @@
+
+require('dotenv').config();
 require('./app_api/models/db');
+const passport = require('passport');
+require('./app_api/config/passport');
+
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -12,6 +18,7 @@ var travelRouter = require('./app_server/routes/travel');
 var apiRouter = require('./app_api/routes/index');
 
 var app = express();
+app.use(passport.initialize());
 
 // View engine setup
 app.set('views', path.join(__dirname, 'app_server', 'views'));
@@ -29,6 +36,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+
   next();
 });
 app.use('/api', apiRouter);

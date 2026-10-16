@@ -1,17 +1,19 @@
 const express = require('express');
 const router = express.Router();
-
-// Import the API controller for trips
 const tripsController = require('../controllers/trips');
+const authController = require('../controllers/authentication');
 
-// Route for all trips
 router
   .route('/trips')
-  .get(tripsController.tripsList);
+  .get(tripsController.tripsList)
+  .post(tripsController.tripsAddTrip);
 
-// Route for a single trip by tripCode
 router
   .route('/trips/:tripCode')
-  .get(tripsController.tripsFindByCode);
+  .get(tripsController.tripsFindByCode)
+  .put(tripsController.tripsUpdateTrip)
+  .delete(tripsController.tripsDeleteTrip);
+router.post('/register', authController.register);
+router.post('/login', authController.login);
 
 module.exports = router;
