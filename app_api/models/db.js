@@ -47,3 +47,5 @@ process.on('SIGTERM', () => {
 
 // Import Schemas & Models
 require('./trips');
+
+require('./user');
