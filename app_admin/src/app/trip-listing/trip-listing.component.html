@@ -3,8 +3,45 @@
   <h2>Trip Listing</h2>
   <p class="alert alert-info">{{ message }}</p>
 
+  <!-- Search, filter, and sorting options -->
+  <div class="row mb-4">
+    <div class="col-md-4 mb-2">
+      <label for="search">Search Trips</label>
+      <input
+        id="search"
+        type="text"
+        class="form-control"
+        placeholder="Search by name or resort"
+        [(ngModel)]="searchTerm">
+    </div>
+
+    <div class="col-md-4 mb-2">
+      <label for="maxPrice">Maximum Price</label>
+      <input
+        id="maxPrice"
+        type="number"
+        min="0"
+        class="form-control"
+        placeholder="Enter maximum price"
+        [(ngModel)]="maxPrice">
+    </div>
+
+    <div class="col-md-4 mb-2">
+      <label for="sort">Sort Trips</label>
+      <select
+        id="sort"
+        class="form-select"
+        [(ngModel)]="sortBy">
+        <option value="name">Name (A-Z)</option>
+        <option value="price">Price (Low to High)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Display filtered trips -->
   <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let trip of trips">
+    <div class="col-md-4 mb-4"
+         *ngFor="let trip of filteredTrips">
       <div class="card h-100">
 
         <img
@@ -39,4 +76,9 @@
       </div>
     </div>
   </div>
+
+  <p *ngIf="trips.length > 0 && filteredTrips.length === 0"
+     class="alert alert-warning">
+    No trips match your search or filters.
+  </p>
 </div>

@@ -6,7 +6,7 @@ const tripsList = async (req, res) => {
     try {
         const trips = await Trip.find({}).exec();
         if (!trips || trips.length === 0) {
-            return res.status(444).json({ message: "Trips not found" });
+            return res.status(200).json([]);
         }
         return res.status(200).json(trips);
     } catch (err) {
